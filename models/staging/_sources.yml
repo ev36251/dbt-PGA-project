@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: raw
+    database: PGA_TOUR
+    schema: RAW
+    tables:
+      - name: asa_tournament_results
