@@ -22,7 +22,7 @@ cleaned as (
         strokes,
         n_rounds,
         finish          as finish_position,
-        made_cut        as made_cut_flag,
+        made_cut,
         purse,
 
         -- strokes gained

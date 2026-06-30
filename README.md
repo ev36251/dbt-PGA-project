@@ -13,13 +13,22 @@ The raw dataset contains one row per player per tournament, including finishing 
 ## Project structure
 
 ## Models
-| Model | Layer | Description |
-|-------|-------|-------------|
-| `stg_results` | staging | Cleans the raw tournament table: renames columns, casts types, drops unused fields, standardizes the strokes-gained metrics |
+
+### Staging
+| Model | Description |
+|-------|-------------|
+| `stg_results` | Cleans the raw tournament table: renames columns, casts types, drops unused fields, standardizes strokes-gained metrics. One row per player per tournament. |
+| `stg_players` | Distinct list of players (player_id, player_name). 499 players. |
+| `stg_tournaments` | Distinct list of tournaments (id, name, course, season, date, purse). 333 tournaments. |
+
+### Marts
+| Model | Description |
+|-------|-------------|
+| `player_season_summary` | Per player per season: tournaments played, cuts made, scoring average, and average strokes gained (total, off-tee, approach, around-green, putting). Strokes-gained values are stored as NULL where untracked rather than misrepresented as zero. |
 
 ## Roadmap
-- [ ] Split staging into `stg_players` and `stg_tournaments` (dimensional model)
-- [ ] `player_season_summary` mart: scoring average, strokes-gained totals, cuts made per season
+- [x] Split staging into `stg_players` and `stg_tournaments` (dimensional model)
+- [x] `player_season_summary` mart with strokes-gained breakdown
 - [ ] `strokes_gained_leaders` mart
 - [ ] Add data tests (not_null, unique, relationships)
 - [ ] Generate dbt docs with lineage graph
