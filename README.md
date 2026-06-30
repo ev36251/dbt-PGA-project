@@ -10,6 +10,12 @@ A dbt project that transforms raw PGA Tour tournament data into clean, analytics
 ## Data
 The raw dataset contains one row per player per tournament, including finishing position, total strokes, cut status, prize money, and the full strokes-gained breakdown (off the tee, approach, around the green, putting, tee-to-green, and total) — the modern standard for analyzing golf performance.
 
+## Data Quality
+
+All staging models are tested with dbt's built-in tests: `unique` and `not_null` on primary keys, `relationships` to enforce referential integrity between the fact table and dimensions, and `accepted_values` on the cut flag. All 10 tests pass.
+
+![dbt test results](docs/images/dbt_test_results.png)
+
 ## Project structure
 
 ## Models
@@ -30,7 +36,7 @@ The raw dataset contains one row per player per tournament, including finishing 
 - [x] Split staging into `stg_players` and `stg_tournaments` (dimensional model)
 - [x] `player_season_summary` mart with strokes-gained breakdown
 - [ ] `strokes_gained_leaders` mart
-- [ ] Add data tests (not_null, unique, relationships)
+- [x] Add data tests (not_null, unique, relationships)
 - [ ] Generate dbt docs with lineage graph
 
 ## Running this project

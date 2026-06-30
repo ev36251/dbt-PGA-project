@@ -20,7 +20,6 @@ players_summary as (
 
     from results
     group by player_name, season
-    having count(distinct tournament_id) >= 10
 
 )
 

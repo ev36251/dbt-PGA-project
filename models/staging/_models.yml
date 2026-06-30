@@ -1,0 +1,39 @@
+models:
+  - name: stg_players
+    columns:
+      - name: player_id
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_tournaments
+    columns:
+      - name: tournament_id
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_results
+    columns:
+      - name: player_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_players')
+                field: player_id
+
+      - name: tournament_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_tournaments')
+                field: tournament_id
+
+      - name: made_cut
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
